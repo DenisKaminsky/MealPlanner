@@ -1,4 +1,5 @@
-﻿using MealPlanner.Data.IOC.MapperProfiles;
+﻿using AutoMapper.Extensions.ExpressionMapping;
+using MealPlanner.Data.IOC.MapperProfiles;
 using MealPlanner.Data.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,7 +22,11 @@ namespace MealPlanner.Data.IOC
             services.AddMongoDatabase();
 
             //configure AutoMapper (it will register all profiles in the assembly)
-            services.AddAutoMapper(typeof(DataMapperProfile));
+            //services.AddAutoMapper(typeof(DataMapperProfile));
+            services.AddAutoMapper(x => x
+                .AddExpressionMapping()
+                .AddProfile<DataMapperProfile>()
+            );
 
             //register all repositories
             services.Scan(scan => scan

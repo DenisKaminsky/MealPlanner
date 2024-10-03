@@ -2,14 +2,8 @@
 {
     public class DemoTestDTO : BaseDTO
     {
-        string Title { get; }
+        public string Title { get; set; }
 
-        double Price { get; }
-
-        public DemoTestDTO(string id, string title, double price) : base(id)
-        {
-            Title = title;
-            Price = price;
-        }
+        public double Price { get; set; }
     }
 }

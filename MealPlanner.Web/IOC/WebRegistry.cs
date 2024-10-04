@@ -1,5 +1,6 @@
 ﻿using AutoMapper.Extensions.ExpressionMapping;
 using MealPlanner.Web.IOC.MapperProfiles;
+using MealPlanner.Web.Services;
 
 namespace MealPlanner.Web.IOC
 {
@@ -18,6 +19,14 @@ namespace MealPlanner.Web.IOC
             services.AddAutoMapper(x => x
                 .AddExpressionMapping()
                 .AddProfile<WebMapperProfile>()
+            );
+
+            //register all services
+            services.Scan(scan => scan
+                .FromAssemblyOf<BaseService>()
+                .AddClasses(classes => classes.AssignableTo<BaseService>())
+                .AsImplementedInterfaces()
+                .WithScopedLifetime()
             );
         }
     }

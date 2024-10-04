@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MealPlanner.Web.Controllers.Product
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class ProductController : BaseAPIController
     {
         private readonly IProductRepository _productRepository;

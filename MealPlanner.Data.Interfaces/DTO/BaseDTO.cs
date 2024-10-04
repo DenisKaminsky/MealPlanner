@@ -3,5 +3,7 @@
     public class BaseDTO
     {
         public string Id { get; set; }
+
+        public DateTime CreatedDateUtc { get; set; }
     }
 }

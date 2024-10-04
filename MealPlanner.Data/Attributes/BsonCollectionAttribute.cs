@@ -1,4 +1,4 @@
-﻿namespace MealPlanner.Misc.Attributes
+﻿namespace MealPlanner.Data.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class BsonCollectionAttribute : Attribute

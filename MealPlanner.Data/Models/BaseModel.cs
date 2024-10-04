@@ -8,5 +8,7 @@ namespace MealPlanner.Data.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+
+        public DateTime CreatedDateUtc { get; set; }
     }
 }

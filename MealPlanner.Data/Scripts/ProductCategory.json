@@ -1,0 +1,82 @@
+[
+  {
+    "_id": { "$oid": "646d8c2c54abf15bc8bc2c01" },
+    "Name": "Oils",
+    "CreatedDateUtc": "2024-10-03T12:00:00Z"
+  },
+  {
+    "_id": { "$oid": "646d8c2c54abf15bc8bc2c02" },
+    "Name": "Grains",
+    "CreatedDateUtc": "2024-10-03T12:00:00Z"
+  },
+  {
+    "_id": { "$oid": "646d8c2c54abf15bc8bc2c03" },
+    "Name": "Vegetables",
+    "CreatedDateUtc": "2024-10-03T12:00:00Z"
+  },
+  {
+    "_id": { "$oid": "646d8c2c54abf15bc8bc2c04" },
+    "Name": "Fruits",
+    "CreatedDateUtc": "2024-10-03T12:00:00Z"
+  },
+  {
+    "_id": { "$oid": "646d8c2c54abf15bc8bc2c05" },
+    "Name": "Meat",
+    "CreatedDateUtc": "2024-10-03T12:00:00Z"
+  },
+  {
+    "_id": { "$oid": "646d8c2c54abf15bc8bc2c06" },
+    "Name": "Dairy",
+    "CreatedDateUtc": "2024-10-03T12:00:00Z"
+  },
+  {
+    "_id": { "$oid": "646d8c2c54abf15bc8bc2c07" },
+    "Name": "Baking",
+    "CreatedDateUtc": "2024-10-03T12:00:00Z"
+  },
+  {
+    "_id": { "$oid": "646d8c2c54abf15bc8bc2c08" },
+    "Name": "Spices",
+    "CreatedDateUtc": "2024-10-03T12:00:00Z"
+  },
+  {
+    "_id": { "$oid": "646d8c2c54abf15bc8bc2c09" },
+    "Name": "Condiments",
+    "CreatedDateUtc": "2024-10-03T12:00:00Z"
+  },
+  {
+    "_id": { "$oid": "646d8c2c54abf15bc8bc2c0A" },
+    "Name": "Drinks",
+    "CreatedDateUtc": "2024-10-03T12:00:00Z"
+  },
+  {
+    "_id": { "$oid": "646d8c2c54abf15bc8bc2c0B" },
+    "Name": "Seafood",
+    "CreatedDateUtc": "2024-10-03T12:00:00Z"
+  },
+  {
+    "_id": { "$oid": "646d8c2c54abf15bc8bc2c0C" },
+    "Name": "Nuts",
+    "CreatedDateUtc": "2024-10-03T12:00:00Z"
+  },
+  {
+    "_id": { "$oid": "646d8c2c54abf15bc8bc2c0D" },
+    "Name": "Legumes",
+    "CreatedDateUtc": "2024-10-03T12:00:00Z"
+  },
+  {
+    "_id": { "$oid": "646d8c2c54abf15bc8bc2c0E" },
+    "Name": "Herbs",
+    "CreatedDateUtc": "2024-10-03T12:00:00Z"
+  },
+  {
+    "_id": { "$oid": "646d8c2c54abf15bc8bc2c10" },
+    "Name": "Snacks",
+    "CreatedDateUtc": "2024-10-03T12:00:00Z"
+  },
+  {
+    "_id": { "$oid": "646d8c2c54abf15bc8bc2c11" },
+    "Name": "Frozen Foods",
+    "CreatedDateUtc": "2024-10-03T12:00:00Z"
+  }
+]

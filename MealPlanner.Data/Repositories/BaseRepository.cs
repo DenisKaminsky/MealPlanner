@@ -1,159 +1,50 @@
 ﻿using AutoMapper;
-using MealPlanner.Data.Interfaces.DTO;
-using MealPlanner.Data.Interfaces.Repositories;
+using MealPlanner.Data.Attributes;
 using MealPlanner.Data.Models;
 using MongoDB.Driver;
-using System.Linq.Expressions;
 
 namespace MealPlanner.Data.Repositories
 {
-    public abstract class BaseRepository<TModel, TDTO> : BaseTransactionRepository, IBaseRepository<TDTO> 
-        where TModel : BaseModel 
-        where TDTO : BaseDTO
+    public abstract class BaseRepository
     {
-        protected static readonly FilterDefinition<TModel> EmptyFiler = Builders<TModel>.Filter.Empty;
+        private readonly IMongoClient _client;
 
-        protected readonly IMongoCollection<TModel> Collection;
+        protected readonly IMongoDatabase Database;
 
-        protected BaseRepository(IMongoClient client, IMongoDatabase database, IMapper mapper) : base(client, database, mapper)
+        protected readonly IMapper Mapper;
+
+        protected BaseRepository(IMongoClient client, IMongoDatabase database, IMapper mapper)
         {
-            Collection = database.GetCollection<TModel>(GetCollectionName<TModel>());
+            _client = client;
+            Database = database;
+            Mapper = mapper;
         }
 
-        #region Read
-        
-        public virtual async Task<List<TDTO>> GetAllAsync()
+        protected string GetCollectionName<T>() where T : BaseModel
         {
-            var items = await (await Collection.FindAsync(EmptyFiler)).ToListAsync();
+            var itemType = typeof(T);
+            var attribute = itemType.GetCustomAttributes(typeof(BsonCollectionAttribute), true).FirstOrDefault();
+            if (attribute != null)
+            {
+                return ((BsonCollectionAttribute)attribute).CollectionName;
+            }
 
-            return Mapper.Map<List<TDTO>>(items);
+            return itemType.Name;
         }
 
-        public virtual async Task<TDTO> GetByIdAsync(string id)
+        protected Task<IClientSessionHandle> BeginTransactionAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            var filter = Builders<TModel>.Filter.Eq(doc => doc.Id, id);
-
-            var item = await (await Collection.FindAsync(filter)).SingleOrDefaultAsync();
-
-            return Mapper.Map<TDTO>(item);
+            return _client.StartSessionAsync(null, cancellationToken);
         }
 
-        public virtual async Task<List<TDTO>> GetAsync(Expression<Func<TDTO, bool>> filterExpression)
+        protected Task CommitTransactionAsync(IClientSessionHandle session, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var modelExpression = Mapper.Map<Expression<Func<TModel, bool>>>(filterExpression);
-
-            var items = await (await Collection.FindAsync(modelExpression)).ToListAsync();
-
-            return Mapper.Map<List<TDTO>>(items);
+            return session.CommitTransactionAsync(cancellationToken);
         }
 
-        public virtual async Task<TDTO> GetFirstAsync(Expression<Func<TDTO, bool>> filterExpression)
+        protected Task RollbackTransactionAsync(IClientSessionHandle session, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var modelExpression = Mapper.Map<Expression<Func<TModel, bool>>>(filterExpression);
-
-            var item =  await (await Collection.FindAsync(modelExpression)).FirstOrDefaultAsync();
-
-            return Mapper.Map<TDTO>(item);
+            return session.AbortTransactionAsync(cancellationToken);
         }
-
-        #endregion
-
-        #region Create
-
-        public virtual async Task<string> CreateAsync(TDTO item)
-        {
-            var model = Mapper.Map<TModel>(item);
-
-            await Collection.InsertOneAsync(model);
-
-            return model.Id;
-        }
-
-        protected virtual async Task CreateAsync(TDTO item, IClientSessionHandle clientSessionHandle)
-        {
-            var model = Mapper.Map<TModel>(item);
-
-            await Collection.InsertOneAsync(clientSessionHandle, model);
-        }
-
-        protected virtual async Task CreateManyAsync(IEnumerable<TDTO> items, IClientSessionHandle clientSessionHandle)
-        {
-            var models = Mapper.Map<List<TModel>>(items);
-
-            await Collection.InsertManyAsync(clientSessionHandle, models);
-        }
-
-        public virtual async Task CreateManyAsync(IEnumerable<TDTO> items)
-        {
-            var models = Mapper.Map<List<TModel>>(items);
-
-            await Collection.InsertManyAsync(models);
-        }
-
-        #endregion
-
-        #region Replace
-
-        protected virtual async Task<bool> ReplaceAsync(TDTO item, IClientSessionHandle clientSessionHandle)
-        {
-            var filter = Builders<TModel>.Filter.Eq(doc => doc.Id, item.Id);
-            var model = Mapper.Map<TModel>(item);
-
-            var updateResult = await Collection.ReplaceOneAsync(clientSessionHandle, filter, model, options: new ReplaceOptions());
-
-            return updateResult.IsAcknowledged && updateResult.ModifiedCount > 0;
-        }
-
-        public virtual async Task<bool> ReplaceAsync(TDTO item)
-        {
-            var filter = Builders<TModel>.Filter.Eq(doc => doc.Id, item.Id);
-            var model = Mapper.Map<TModel>(item);
-
-            var updateResult = await Collection.ReplaceOneAsync(filter, model, options: new ReplaceOptions());
-
-            return updateResult.IsAcknowledged && updateResult.ModifiedCount > 0;
-        }
-
-        #endregion
-
-        #region Delete
-
-        protected virtual async Task<bool> DeleteOneAsync(string id, IClientSessionHandle clientSessionHandle)
-        {
-            var filter = Builders<TModel>.Filter.Eq(doc => doc.Id, id);
-
-            var deleteResult = await Collection.DeleteOneAsync(clientSessionHandle, filter);
-
-            return deleteResult.IsAcknowledged && deleteResult.DeletedCount > 0;
-        }
-
-        public virtual async Task<bool> DeleteOneAsync(string id)
-        {
-            var filter = Builders<TModel>.Filter.Eq(doc => doc.Id, id);
-
-            var deleteResult = await Collection.DeleteOneAsync(filter);
-
-            return deleteResult.IsAcknowledged && deleteResult.DeletedCount > 0;
-        }
-
-        protected virtual async Task<bool> DeleteManyAsync(Expression<Func<TDTO, bool>> filterExpression, IClientSessionHandle clientSessionHandle)
-        {
-            var modelExpression = Mapper.Map<Expression<Func<TModel, bool>>>(filterExpression);
-
-            var deleteResult = await Collection.DeleteManyAsync(clientSessionHandle, modelExpression);
-            
-            return deleteResult.IsAcknowledged && deleteResult.DeletedCount > 0;
-        }
-
-        public virtual async Task<bool> DeleteManyAsync(Expression<Func<TDTO, bool>> filterExpression)
-        {
-            var modelExpression = Mapper.Map<Expression<Func<TModel, bool>>>(filterExpression);
-
-            var deleteResult = await Collection.DeleteManyAsync(modelExpression);
-
-            return deleteResult.IsAcknowledged && deleteResult.DeletedCount > 0;
-        }
-
-        #endregion
     }
 }

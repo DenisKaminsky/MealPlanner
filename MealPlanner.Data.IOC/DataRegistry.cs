@@ -22,7 +22,6 @@ namespace MealPlanner.Data.IOC
             services.AddMongoDatabase();
 
             //configure AutoMapper (it will register all profiles in the assembly)
-            //services.AddAutoMapper(typeof(DataMapperProfile));
             services.AddAutoMapper(x => x
                 .AddExpressionMapping()
                 .AddProfile<DataMapperProfile>()
@@ -30,8 +29,8 @@ namespace MealPlanner.Data.IOC
 
             //register all repositories
             services.Scan(scan => scan
-                .FromAssemblyOf<BaseTransactionRepository>()
-                .AddClasses(classes => classes.AssignableTo<BaseTransactionRepository>())
+                .FromAssemblyOf<BaseRepository>()
+                .AddClasses(classes => classes.AssignableTo<BaseRepository>())
                     .AsImplementedInterfaces()
                     .WithScopedLifetime()
             );

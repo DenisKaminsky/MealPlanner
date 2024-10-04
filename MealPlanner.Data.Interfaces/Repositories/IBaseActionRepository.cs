@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace MealPlanner.Data.Interfaces.Repositories
 {
-    public interface IBaseRepository<T> where T : BaseDTO
+    public interface IBaseActionRepository<T> where T : BaseDTO
     {
         #region Read
 

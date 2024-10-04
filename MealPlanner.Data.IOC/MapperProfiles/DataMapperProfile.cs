@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using MealPlanner.Data.Interfaces.DTO.Demo;
-using MealPlanner.Data.Models.Demo;
+using MealPlanner.Data.Interfaces.DTO.Product;
+using MealPlanner.Data.Models.Product;
 
 namespace MealPlanner.Data.IOC.MapperProfiles
 {
@@ -8,7 +8,7 @@ namespace MealPlanner.Data.IOC.MapperProfiles
     {
         public DataMapperProfile()
         {
-            CreateMap<DemoTest, DemoTestDTO>().ReverseMap();
+            CreateMap<ProductCategory, ProductCategoryDTO>();
         }
     }
 }

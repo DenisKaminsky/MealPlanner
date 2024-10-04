@@ -1,4 +1,7 @@
-﻿namespace MealPlanner.Web.IOC
+﻿using AutoMapper.Extensions.ExpressionMapping;
+using MealPlanner.Web.IOC.MapperProfiles;
+
+namespace MealPlanner.Web.IOC
 {
     public static class WebRegistry
     {
@@ -11,7 +14,11 @@
             this IServiceCollection services,
             IConfiguration config)
         {
-
+            //configure AutoMapper (it will register all profiles in the assembly)
+            services.AddAutoMapper(x => x
+                .AddExpressionMapping()
+                .AddProfile<WebMapperProfile>()
+            );
         }
     }
 }

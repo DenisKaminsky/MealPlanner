@@ -7,25 +7,37 @@ namespace MealPlanner.Web.Controllers.Product
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductCategoryController : ControllerBase
+    public class ProductCategoryController : BaseAPIController
     {
         private readonly IProductCategoryRepository _productCategoryRepository;
-        private readonly IMapper _mapper;
 
-        public ProductCategoryController(IProductCategoryRepository productCategoryRepository, IMapper mapper)
+        public ProductCategoryController(IProductCategoryRepository productCategoryRepository, IMapper mapper) : base(mapper)
         {
             _productCategoryRepository = productCategoryRepository;
-            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ProductCategoryResponse>> GetAllAsync()
+        public async Task<IActionResult> GetAllAsync()
         {
             var data = await _productCategoryRepository.GetAllAsync();
 
-            var response = _mapper.Map<List<ProductCategoryResponse>>(data);
+            var response = Mapper.Map<List<ProductCategoryResponse>>(data);
 
-            return response;
+            return Ok(response);
+        }
+
+        [HttpGet("{categoryId}")]
+        public async Task<IActionResult> GetCategoryWithProducts(string categoryId)
+        {
+            var data = await _productCategoryRepository.GetCategoryWithProductsAsync(categoryId);
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            var response = Mapper.Map<ProductCategoryWithProductsResponse>(data);
+
+            return Ok(response);
         }
     }
 }

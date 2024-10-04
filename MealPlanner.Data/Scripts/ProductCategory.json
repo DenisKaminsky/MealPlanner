@@ -26,7 +26,7 @@
   },
   {
     "_id": { "$oid": "646d8c2c54abf15bc8bc2c06" },
-    "Name": "Dairy",
+    "Name": "Dairy & Eggs",
     "CreatedDateUtc": "2024-10-03T12:00:00Z"
   },
   {

@@ -39,8 +39,29 @@ namespace MealPlanner.Data.Repositories.Product
             return result;
         }
 
+        public async Task<List<ProductWithCategoryDTO>> GetAllAsync()
+        {
+            var items = await _products
+                .AsQueryable()
+                .Join(
+                    _productCategories,
+                    product => product.CategoryId,
+                    category => category.Id,
+                    (product, category) => new ProductWithCategoryDTO
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        UnitOfMeasurement = product.UnitOfMeasurement,
+                        CategoryId = category.Id,
+                        CategoryName = category.Name
+                    })
+                .ToListAsync();
 
-        private Expression<Func<Models.Product.Product, ProductDTO>> ToProductDTO = x => new ProductDTO
+            return items;
+        }
+
+
+        private readonly Expression<Func<Models.Product.Product, ProductDTO>> ToProductDTO = x => new ProductDTO
         {
             Id = x.Id,
             Name = x.Name,

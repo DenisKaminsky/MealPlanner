@@ -7,5 +7,7 @@ namespace MealPlanner.Data.Interfaces.Repositories.Product
         Task<List<ProductDTO>> GetByCategoryAsync(string categoryId);
 
         Task<List<ProductDTO>> SearchByNameAsync(string name);
+
+        Task<List<ProductWithCategoryDTO>> GetAllAsync();
     }
 }

@@ -33,5 +33,20 @@ namespace MealPlanner.Web.Controllers.Product
 
             return Ok(response);
         }
+
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAllAsync()
+        {
+            var data = await _productRepository.GetAllAsync();
+
+            var response = Mapper.Map<List<ProductWithCategoryResponse>>(data);
+
+            var sorted = response
+                .OrderBy(x => x.CategoryId)
+                .ThenBy(x => x.Name)
+                .ToList();
+
+            return Ok(sorted);
+        }
     }
 }

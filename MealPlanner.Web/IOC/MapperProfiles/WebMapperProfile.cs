@@ -11,6 +11,7 @@ namespace MealPlanner.Web.IOC.MapperProfiles
             CreateMap<ProductDTO, ProductResponse>();
             CreateMap<ProductCategoryDTO, ProductCategoryResponse>();
             CreateMap<ProductCategoryWithProductsDTO, ProductCategoryWithProductsResponse>();
+            CreateMap<ProductWithCategoryDTO, ProductWithCategoryResponse>();
         }
     }
 }

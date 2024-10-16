@@ -32,9 +32,12 @@ namespace MealPlanner.Data.Repositories
             return itemType.Name;
         }
 
-        protected Task<IClientSessionHandle> BeginTransactionAsync(CancellationToken cancellationToken = default(CancellationToken))
+        protected async Task<IClientSessionHandle> BeginTransactionAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            return _client.StartSessionAsync(null, cancellationToken);
+            var session = await _client.StartSessionAsync(null, cancellationToken);
+            session.StartTransaction();
+
+            return session;
         }
 
         protected Task CommitTransactionAsync(IClientSessionHandle session, CancellationToken cancellationToken = default(CancellationToken))

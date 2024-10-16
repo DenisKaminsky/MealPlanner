@@ -1,6 +1,6 @@
 ﻿namespace MealPlanner.Data.Interfaces.DTO.Product
 {
-    public class ProductWithCategoryDTO : BaseDTO
+    public class GetProductWithCategoryDTO : BaseDTO
     {
         public string Name { get; set; }
 

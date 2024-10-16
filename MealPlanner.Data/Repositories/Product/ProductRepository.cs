@@ -19,7 +19,7 @@ namespace MealPlanner.Data.Repositories.Product
             _products= database.GetCollection<Models.Product.Product>(GetCollectionName<Models.Product.Product>());
         }
 
-        public async Task<List<ProductDTO>> GetByCategoryAsync(string categoryId)
+        public async Task<List<GetProductDTO>> GetByCategoryAsync(string categoryId)
         {
             var data = await _products.AsQueryable()
                 .Where(x => x.CategoryId.Equals(categoryId.ToLower()))
@@ -29,7 +29,7 @@ namespace MealPlanner.Data.Repositories.Product
             return data;
         }
 
-        public async Task<List<ProductDTO>> SearchByNameAsync(string name)
+        public async Task<List<GetProductDTO>> SearchByNameAsync(string name)
         {
             var result = await _products.AsQueryable()
                 .Where(x => x.Name.ToLower().Contains(name.ToLower()))
@@ -39,7 +39,7 @@ namespace MealPlanner.Data.Repositories.Product
             return result;
         }
 
-        public async Task<List<ProductWithCategoryDTO>> GetAllAsync()
+        public async Task<List<GetProductWithCategoryDTO>> GetAllAsync()
         {
             var items = await _products
                 .AsQueryable()
@@ -47,7 +47,7 @@ namespace MealPlanner.Data.Repositories.Product
                     _productCategories,
                     product => product.CategoryId,
                     category => category.Id,
-                    (product, category) => new ProductWithCategoryDTO
+                    (product, category) => new GetProductWithCategoryDTO
                     {
                         Id = product.Id,
                         Name = product.Name,
@@ -61,7 +61,7 @@ namespace MealPlanner.Data.Repositories.Product
         }
 
 
-        private readonly Expression<Func<Models.Product.Product, ProductDTO>> ToProductDTO = x => new ProductDTO
+        private readonly Expression<Func<Models.Product.Product, GetProductDTO>> ToProductDTO = x => new GetProductDTO
         {
             Id = x.Id,
             Name = x.Name,

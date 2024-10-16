@@ -19,7 +19,7 @@ namespace MealPlanner.Web.Controllers.Product
         {
             var data = await _productCategoryRepository.GetAllAsync();
 
-            var response = Mapper.Map<List<ProductCategoryResponse>>(data);
+            var response = Mapper.Map<List<GetProductCategoryResponse>>(data);
 
             return Ok(response);
         }
@@ -33,7 +33,7 @@ namespace MealPlanner.Web.Controllers.Product
                 return NotFound();
             }
 
-            var response = Mapper.Map<ProductCategoryWithProductsResponse>(data);
+            var response = Mapper.Map<GetProductCategoryWithProductsResponse>(data);
 
             return Ok(response);
         }

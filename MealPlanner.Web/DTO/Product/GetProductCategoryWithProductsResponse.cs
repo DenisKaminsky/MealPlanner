@@ -1,11 +1,11 @@
 ﻿namespace MealPlanner.Web.DTO.Product
 {
-    public class ProductResponse
+    public class GetProductCategoryWithProductsResponse
     {
         public string Id { get; set; }
 
         public string Name { get; set; }
 
-        public string UnitOfMeasurement { get; set; }
+        public IEnumerable<GetProductResponse> Products { get; set; }
     }
 }

@@ -18,17 +18,17 @@ namespace MealPlanner.Data.Repositories.Product
             _products = database.GetCollection<Models.Product.Product>(GetCollectionName<Models.Product.Product>());
         }
 
-        public async Task<List<ProductCategoryDTO>> GetAllAsync()
+        public async Task<List<GetProductCategoryDTO>> GetAllAsync()
         {
             var items = await _productCategories
                 .AsQueryable()
                 .OrderBy(x => x.Name)
                 .ToListAsync();
 
-            return Mapper.Map<List<ProductCategoryDTO>>(items);
+            return Mapper.Map<List<GetProductCategoryDTO>>(items);
         }
 
-        public async Task<ProductCategoryWithProductsDTO> GetCategoryWithProductsAsync(string categoryId)
+        public async Task<GetProductCategoryWithProductsDTO> GetCategoryWithProductsAsync(string categoryId)
         {
             var item = await _productCategories
                 .AsQueryable()
@@ -37,11 +37,11 @@ namespace MealPlanner.Data.Repositories.Product
                     _products,
                     category => category.Id,
                     product => product.CategoryId,
-                    (category, products) => new ProductCategoryWithProductsDTO
+                    (category, products) => new GetProductCategoryWithProductsDTO
                     {
                         Id = category.Id,
                         Name = category.Name,
-                        Products = products.Select(x => new ProductDTO
+                        Products = products.Select(x => new GetProductDTO
                         {
                             Id = x.Id,
                             Name = x.Name,

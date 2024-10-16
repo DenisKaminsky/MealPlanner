@@ -19,7 +19,7 @@ namespace MealPlanner.Web.Controllers.Product
         {
             var data = await _productRepository.GetByCategoryAsync(categoryId);
 
-            var response = Mapper.Map<List<ProductResponse>>(data);
+            var response = Mapper.Map<List<GetProductResponse>>(data);
 
             return Ok(response);
         }
@@ -29,7 +29,7 @@ namespace MealPlanner.Web.Controllers.Product
         {
             var data = await _productRepository.SearchByNameAsync(name);
 
-            var response = Mapper.Map<List<ProductResponse>>(data);
+            var response = Mapper.Map<List<GetProductResponse>>(data);
 
             return Ok(response);
         }
@@ -39,7 +39,7 @@ namespace MealPlanner.Web.Controllers.Product
         {
             var data = await _productRepository.GetAllAsync();
 
-            var response = Mapper.Map<List<ProductWithCategoryResponse>>(data);
+            var response = Mapper.Map<List<GetProductWithCategoryResponse>>(data);
 
             var sorted = response
                 .OrderBy(x => x.CategoryId)

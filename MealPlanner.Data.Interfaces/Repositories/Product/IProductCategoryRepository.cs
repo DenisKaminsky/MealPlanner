@@ -4,8 +4,8 @@ namespace MealPlanner.Data.Interfaces.Repositories.Product
 {
     public interface IProductCategoryRepository
     {
-       Task<List<ProductCategoryDTO>> GetAllAsync();
+       Task<List<GetProductCategoryDTO>> GetAllAsync();
 
-       Task<ProductCategoryWithProductsDTO> GetCategoryWithProductsAsync(string categoryId);
+       Task<GetProductCategoryWithProductsDTO> GetCategoryWithProductsAsync(string categoryId);
     }
 }

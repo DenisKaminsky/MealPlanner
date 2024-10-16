@@ -8,7 +8,7 @@ namespace MealPlanner.Data.IOC.MapperProfiles
     {
         public DataMapperProfile()
         {
-            CreateMap<ProductCategory, ProductCategoryDTO>();
+            CreateMap<ProductCategory, GetProductCategoryDTO>();
         }
     }
 }

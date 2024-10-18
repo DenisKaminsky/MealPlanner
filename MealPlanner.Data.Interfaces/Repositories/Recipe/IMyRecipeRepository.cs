@@ -12,5 +12,9 @@ namespace MealPlanner.Data.Interfaces.Repositories.Recipe
         Task<string> CreateAsync(SaveNewRecipeDTO item);
 
         Task<bool> DeleteOneAsync(string id);
+
+        Task MarkAsFavorite(string id);
+
+        Task Unfavorite(string id);
     }
 }

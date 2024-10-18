@@ -60,5 +60,32 @@ namespace MealPlanner.Web.Controllers.Recipe
 
             return CreatedAtAction(nameof(GetById), new { recipeId = newId }, response);
         }
+
+        [HttpPut("Favorite/{recipeId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> MarkAsFavorite(string recipeId)
+        {
+            await _recipeRepository.MarkAsFavorite(recipeId);
+
+            return Ok();
+        }
+
+        [HttpPut("Unfavorite/{recipeId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Unfavorite(string recipeId)
+        {
+            await _recipeRepository.Unfavorite(recipeId);
+
+            return Ok();
+        }
+
+        [HttpDelete("{recipeId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> DeleteAsync(string recipeId)
+        {
+            await _recipeRepository.DeleteOneAsync(recipeId);
+
+            return NoContent();
+        }
     }
 }

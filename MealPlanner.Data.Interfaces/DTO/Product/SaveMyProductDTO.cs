@@ -1,6 +1,6 @@
 ﻿namespace MealPlanner.Data.Interfaces.DTO.Product
 {
-    public class SaveMyProductDTO
+    public class SaveMyProductDTO : BaseCreateDTO
     {
         public string ProductId { get; set; }
 

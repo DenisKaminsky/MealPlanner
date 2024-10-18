@@ -7,9 +7,10 @@ using System.Linq.Expressions;
 
 namespace MealPlanner.Data.Repositories
 {
-    public abstract class BaseActionRepository<TModel, TDTO> : BaseRepository, IBaseActionRepository<TDTO> 
+    public abstract class BaseActionRepository<TModel, TDTO, TCreateDTO> : BaseRepository, IBaseActionRepository<TDTO, TCreateDTO> 
         where TModel : BaseModel 
         where TDTO : BaseDTO
+        where TCreateDTO : BaseCreateDTO
     {
         protected static readonly FilterDefinition<TModel> EmptyFiler = Builders<TModel>.Filter.Empty;
 
@@ -60,7 +61,7 @@ namespace MealPlanner.Data.Repositories
 
         #region Create
 
-        public virtual async Task<string> CreateAsync(TDTO item)
+        public virtual async Task<string> CreateAsync(TCreateDTO item)
         {
             var model = Mapper.Map<TModel>(item);
 
@@ -69,21 +70,21 @@ namespace MealPlanner.Data.Repositories
             return model.Id;
         }
 
-        protected virtual async Task CreateAsync(TDTO item, IClientSessionHandle clientSessionHandle)
+        protected virtual async Task CreateAsync(TCreateDTO item, IClientSessionHandle clientSessionHandle)
         {
             var model = Mapper.Map<TModel>(item);
 
             await Collection.InsertOneAsync(clientSessionHandle, model);
         }
 
-        protected virtual async Task CreateManyAsync(IEnumerable<TDTO> items, IClientSessionHandle clientSessionHandle)
+        protected virtual async Task CreateManyAsync(IEnumerable<TCreateDTO> items, IClientSessionHandle clientSessionHandle)
         {
             var models = Mapper.Map<List<TModel>>(items);
 
             await Collection.InsertManyAsync(clientSessionHandle, models);
         }
 
-        public virtual async Task CreateManyAsync(IEnumerable<TDTO> items)
+        public virtual async Task CreateManyAsync(IEnumerable<TCreateDTO> items)
         {
             var models = Mapper.Map<List<TModel>>(items);
 

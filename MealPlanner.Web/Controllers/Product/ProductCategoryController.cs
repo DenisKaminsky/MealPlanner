@@ -15,6 +15,7 @@ namespace MealPlanner.Web.Controllers.Product
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllAsync()
         {
             var data = await _productCategoryRepository.GetAllAsync();
@@ -25,6 +26,7 @@ namespace MealPlanner.Web.Controllers.Product
         }
 
         [HttpGet("{categoryId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetCategoryWithProducts(string categoryId)
         {
             var data = await _productCategoryRepository.GetCategoryWithProductsAsync(categoryId);

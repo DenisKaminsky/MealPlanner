@@ -15,6 +15,7 @@ namespace MealPlanner.Web.Controllers.Product
         }
 
         [HttpGet("GetByCategory/{categoryId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetByCategory(string categoryId)
         {
             var data = await _productRepository.GetByCategoryAsync(categoryId);
@@ -25,6 +26,7 @@ namespace MealPlanner.Web.Controllers.Product
         }
 
         [HttpGet("Search/{name}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Search(string name)
         {
             var data = await _productRepository.SearchByNameAsync(name);
@@ -35,6 +37,7 @@ namespace MealPlanner.Web.Controllers.Product
         }
 
         [HttpGet("GetAll")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllAsync()
         {
             var data = await _productRepository.GetAllAsync();

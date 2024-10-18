@@ -16,11 +16,12 @@ namespace MealPlanner.Web.Controllers.Product
         }
 
         [HttpGet("GetAll")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllAsync()
         {
             var data = await _myProductRepository.GetAllAsync();
 
-            var response = Mapper.Map<List<GetMyProductDTO>>(data);
+            var response = Mapper.Map<List<GetMyProductResponse>>(data);
 
             var sorted = response
                 .OrderBy(x => x.CategoryId)
@@ -31,12 +32,13 @@ namespace MealPlanner.Web.Controllers.Product
         }
 
         [HttpPost("Save")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> SaveAsync(List<SaveMyProductRequest> myProductRequests)
         {
             var data = SanitizeMyProductRequest(myProductRequests);
-            var mappedData = Mapper.Map<List<SaveMyProductDTO>>(data);
+            var request = Mapper.Map<List<SaveMyProductDTO>>(data);
 
-            await _myProductRepository.SaveAsync(mappedData);
+            await _myProductRepository.SaveAsync(request);
 
             return Created();
         }

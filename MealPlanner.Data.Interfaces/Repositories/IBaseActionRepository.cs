@@ -3,31 +3,33 @@ using System.Linq.Expressions;
 
 namespace MealPlanner.Data.Interfaces.Repositories
 {
-    public interface IBaseActionRepository<T> where T : BaseDTO
+    public interface IBaseActionRepository<TDTO, TCreateDTO> 
+        where TDTO : BaseDTO
+        where TCreateDTO : BaseCreateDTO
     {
         #region Read
 
-        Task<List<T>> GetAllAsync();
+        Task<List<TDTO>> GetAllAsync();
 
-        Task<T> GetByIdAsync(string id);
+        Task<TDTO> GetByIdAsync(string id);
 
-        Task<List<T>> GetAsync(Expression<Func<T, bool>> filterExpression);
+        Task<List<TDTO>> GetAsync(Expression<Func<TDTO, bool>> filterExpression);
 
-        Task<T> GetFirstAsync(Expression<Func<T, bool>> filterExpression);
+        Task<TDTO> GetFirstAsync(Expression<Func<TDTO, bool>> filterExpression);
 
         #endregion
 
         #region Create
 
-        Task<string> CreateAsync(T item);
+        Task<string> CreateAsync(TCreateDTO item);
 
-        Task CreateManyAsync(IEnumerable<T> items);
+        Task CreateManyAsync(IEnumerable<TCreateDTO> items);
 
         #endregion
 
         #region Replace
         
-        Task<bool> ReplaceAsync(T item);
+        Task<bool> ReplaceAsync(TDTO item);
 
         #endregion
 
@@ -35,7 +37,7 @@ namespace MealPlanner.Data.Interfaces.Repositories
         
         Task<bool> DeleteOneAsync(string id);
         
-        Task<bool> DeleteManyAsync(Expression<Func<T, bool>> filterExpression);
+        Task<bool> DeleteManyAsync(Expression<Func<TDTO, bool>> filterExpression);
 
         #endregion
     }

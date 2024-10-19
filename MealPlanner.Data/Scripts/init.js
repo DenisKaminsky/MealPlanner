@@ -1,6 +1,8 @@
-﻿use MealPlannerDb
+﻿// Switch to the database (this will create it if it doesn't exist)
+db = db.getSiblingDB('MealPlannerDb');
 
 db.createCollection("ProductCategory");
+
 db.ProductCategory.createIndex({ "Name": 1 });
 
 

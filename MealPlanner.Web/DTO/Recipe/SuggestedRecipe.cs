@@ -11,7 +11,5 @@
         public IEnumerable<string> Instructions { get; set; }
 
         public int CookTimeInMinutes { get; set; }
-
-        public DateTime CreatedDateUtc { get; set; }
     }
 }

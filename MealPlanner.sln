@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPlanner.Web", "MealPlanner.Web\MealPlanner.Web.csproj", "{AE0A082D-F2D2-409F-B226-F20A36C0FE8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MealPlanner.Web", "MealPlanner.Web\MealPlanner.Web.csproj", "{AE0A082D-F2D2-409F-B226-F20A36C0FE8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPlanner.Data", "MealPlanner.Data\MealPlanner.Data.csproj", "{83C7797E-8C64-426A-8718-9635EEDD2000}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MealPlanner.Data", "MealPlanner.Data\MealPlanner.Data.csproj", "{83C7797E-8C64-426A-8718-9635EEDD2000}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPlanner.Data.Interfaces", "MealPlanner.Data.Interfaces\MealPlanner.Data.Interfaces.csproj", "{F98ADCA6-41A9-4A2D-8244-AF2C748613D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MealPlanner.Data.Interfaces", "MealPlanner.Data.Interfaces\MealPlanner.Data.Interfaces.csproj", "{F98ADCA6-41A9-4A2D-8244-AF2C748613D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPlanner.Misc", "MealPlanner.Misc\MealPlanner.Misc.csproj", "{6C072DBA-50A3-4DFD-B42F-E2113FF22AD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MealPlanner.Misc", "MealPlanner.Misc\MealPlanner.Misc.csproj", "{6C072DBA-50A3-4DFD-B42F-E2113FF22AD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPlanner.Data.IOC", "MealPlanner.Data.IOC\MealPlanner.Data.IOC.csproj", "{5C46BA35-0868-40F2-8C79-F0736C32A8FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MealPlanner.Data.IOC", "MealPlanner.Data.IOC\MealPlanner.Data.IOC.csproj", "{5C46BA35-0868-40F2-8C79-F0736C32A8FA}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{13060226-10C6-428E-9E8C-036DA335918F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{5C46BA35-0868-40F2-8C79-F0736C32A8FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C46BA35-0868-40F2-8C79-F0736C32A8FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C46BA35-0868-40F2-8C79-F0736C32A8FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13060226-10C6-428E-9E8C-036DA335918F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13060226-10C6-428E-9E8C-036DA335918F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13060226-10C6-428E-9E8C-036DA335918F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13060226-10C6-428E-9E8C-036DA335918F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

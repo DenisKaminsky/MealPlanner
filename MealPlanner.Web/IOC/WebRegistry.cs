@@ -1,4 +1,5 @@
 ﻿using AutoMapper.Extensions.ExpressionMapping;
+using DotnetGeminiSDK;
 using MealPlanner.Web.IOC.MapperProfiles;
 using MealPlanner.Web.Services;
 
@@ -28,6 +29,11 @@ namespace MealPlanner.Web.IOC
                 .AsImplementedInterfaces()
                 .WithScopedLifetime()
             );
+
+            services.AddGeminiClient(x =>
+            {
+                x.ApiKey = config["GeminiAI:ApiKey"]!;
+            });
         }
     }
 }
